@@ -10,6 +10,13 @@ import {
 
 const router = Router();
 
-// TODO: wire up the routes described in README.md section 3.
+// IMPORTANT: /summary must be registered before /:id 
+router.get('/summary', getCourseSummary);
+
+router.get('/', getAllReviews);
+router.post('/', createReview);
+router.get('/:id', getReview);
+router.patch('/:id', updateReview);
+router.delete('/:id', deleteReview);
 
 export default router;
