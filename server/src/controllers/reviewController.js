@@ -1,6 +1,13 @@
 import { Review } from '../models/Review.js';
+import Joi from 'joi';
 
 // TODO: write a validation schema for create/update per README.md section 2.
+const reviewValidationSchema = Joi.object({
+  courseCode: Joi.string().required(),
+  rating: Joi.number().min(1).max(5).required(),
+  comment: Joi.string().optional(),
+  reviewedBy: Joi.string().hex().length(24).optional()
+});
 
 // GET /api/reviews
 // TODO: implement per README.md section 3.
