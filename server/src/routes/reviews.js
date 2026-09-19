@@ -10,6 +10,11 @@ import {
 
 const router = Router();
 
-// TODO: wire up the routes described in README.md section 3.
+router.post('/', createReview);
+router.get('/', getAllReviews);
+router.get('/summary', getCourseSummary);
+router.get('/:id', getReview);
+router.patch('/:id', updateReview);
+router.delete('/:id', deleteReview);
 
 export default router;
