@@ -1,4 +1,4 @@
-import Review from '../models/Review.js';
+import {Review} from '../models/Review.js';
 import Joi from 'joi';
 
 // TODO: write a validation schema for create/update per README.md section 2.
