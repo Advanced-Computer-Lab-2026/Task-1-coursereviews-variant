@@ -37,6 +37,33 @@ export async function getReview(req, res, next) {
 export async function getCourseSummary(req, res, next) {
   try {
     // TODO
+    //1. extracting courseCode from query parameters
+    const { courseCode } = req.query;
+    if (!courseCode) {
+      return res.status(400).json({ error: 'courseCode query parameter is required' });
+    }
+
+    //2. The Aggregation Pipeline
+    const summary = await Review.aggregate([
+      { $match: {courseCode: courseCode} },
+
+      { $group: {
+        _id: '$courseCode',
+        averageRating: { $avg: '$rating' },
+        reviewCount: { $sum: 1 }
+      }
+    }
+    ]);
+
+    if (summary.length === 0) {
+      return res.status(404).json({ error: 'No reviews found for this course' });
+    }
+
+    res.status(200).json({
+      courseCode: summary[0]._id,
+      averageRating: Math.round(summary[0].averageRating * 10) / 10, // rounding to 1 decimal place
+      reviewCount: summary[0].reviewCount
+    });
   } catch (err) { next(err); }
 }
 
