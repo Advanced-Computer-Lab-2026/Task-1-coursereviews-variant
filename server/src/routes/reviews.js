@@ -9,7 +9,12 @@ import {
 } from '../controllers/reviewController.js';
 
 const router = Router();
+router.get('/summary', getCourseSummary);
+router.get('/', getAllReviews);
+router.get('/:id', getReview);
 
-// TODO: wire up the routes described in README.md section 3.
+router.post('/', createReview);
+router.patch('/:id', updateReview);
+router.delete('/:id', deleteReview);
 
 export default router;
