@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+//database schema for reviews
 const reviewSchema = new mongoose.Schema(
   {
     courseCode: {

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+//database schema for users
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },

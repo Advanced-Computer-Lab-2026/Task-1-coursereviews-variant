@@ -5,7 +5,7 @@ import reviewRoutes from './routes/reviews.js';
 import userRoutes from './routes/users.js';
 
 const app = express();
-
+//error handling
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());

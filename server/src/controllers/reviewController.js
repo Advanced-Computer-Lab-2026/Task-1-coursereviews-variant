@@ -1,5 +1,5 @@
 import { Review } from '../models/Review.js';
-
+//middleman to connect http with the database 
 // TODO: write a validation schema for create/update per README.md section 2.
 
 // GET /api/reviews
