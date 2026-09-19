@@ -14,7 +14,7 @@ const reviewValidationSchema = Joi.object({
 export async function getAllReviews(req, res, next) {
   try {
     //TODO
-    const reviews = await Review.find();
+    const reviews = await Review.find().populate('reviewedBy', 'name email'); // populating reviewedBy field with name and email
     res.status(200).json(reviews);
   } catch (err) { next(err); }
 }
@@ -24,7 +24,7 @@ export async function getAllReviews(req, res, next) {
 export async function getReview(req, res, next) {
   try {
     // TODO
-    const review = await Review.findById(req.params.id);
+    const review = await Review.findById(req.params.id).populate('reviewedBy', 'name email');
     if (!review) {
       return res.status(404).json({ error: 'Review not found' });
     }
