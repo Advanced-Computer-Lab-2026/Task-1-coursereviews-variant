@@ -10,6 +10,10 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Course Review Board API is running' });
+});
+
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
 app.use('/api/reviews', reviewRoutes);
