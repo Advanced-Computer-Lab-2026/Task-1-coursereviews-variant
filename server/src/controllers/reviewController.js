@@ -1,7 +1,20 @@
+import Joi from 'joi';
 import { Review } from '../models/Review.js';
 
 // TODO: write a validation schema for create/update per README.md section 2.
+const createSchema = Joi.object({
+  courseCode: Joi.string().trim().required(),
+  rating: Joi.number().integer().min(1).max(5).required(),
+  comment: Joi.string().trim().allow('').optional(),
+  reviewedBy: Joi.string().hex().length(24).optional(),
+});
 
+const updateSchema = Joi.object({
+  courseCode: Joi.string().trim(),
+  rating: Joi.number().integer().min(1).max(5),
+  comment: Joi.string().trim().allow(''),
+  reviewedBy: Joi.string().hex().length(24),
+});
 // GET /api/reviews
 // TODO: implement per README.md section 3.
 export async function getAllReviews(req, res, next) {
