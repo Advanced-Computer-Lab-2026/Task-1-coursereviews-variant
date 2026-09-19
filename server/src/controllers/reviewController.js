@@ -44,13 +44,11 @@ export async function getAllReviews(req, res, next) {
 
 export async function getReview(req, res, next) {
   try {
-    const review = await Review.findOne({ _id: req.params.id }).populate('reviewedBy', 'name email');
-
+    const review = await Review.findById({ _id: req.params.id }).populate('reviewedBy', 'name email');
     if (!review) {
       return res.status(404).json({ message: 'Review not found' });
     }
-
-    return res.json(review);
+    res.json(review);
   } catch (err) {
     next(err);
   }
