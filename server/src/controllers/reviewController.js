@@ -1,6 +1,19 @@
+import Joi from 'joi';
 import { Review } from '../models/Review.js';
 
-// TODO: write a validation schema for create/update per README.md section 2.
+const createSchema = Joi.object({
+  courseCode: Joi.string().required(),
+  rating: Joi.number().integer().min(1).max(5).required(),
+  comment: Joi.string(),
+  reviewedBy: Joi.string()
+}).required();
+
+const updateSchema = Joi.object({
+  courseCode: Joi.string(),
+  rating: Joi.number().integer().min(1).max(5),
+  comment: Joi.string(),
+  reviewedBy: Joi.string()
+}).min(1).required();
 
 // GET /api/reviews
 // TODO: implement per README.md section 3.
@@ -30,7 +43,10 @@ export async function getCourseSummary(req, res, next) {
 // TODO: implement per README.md section 3.
 export async function createReview(req, res, next) {
   try {
-    // TODO
+    const { value, error } = createSchema.validate(req.body, { abortEarly: false, stripUnknown: true });
+    if (error) return res.status(400).json({ message: error.message });
+
+    // TODO: create the review document after validation.
   } catch (err) {
     next(err);
   }
@@ -40,7 +56,10 @@ export async function createReview(req, res, next) {
 // TODO: implement per README.md sections 3 and 5.
 export async function updateReview(req, res, next) {
   try {
-    // TODO
+    const { value, error } = updateSchema.validate(req.body, { abortEarly: false, stripUnknown: true });
+    if (error) return res.status(400).json({ message: error.message });
+
+    // TODO: update the review after validation.
   } catch (err) { next(err); }
 }
 
