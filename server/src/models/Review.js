@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { User } from './User';
+import { User } from './User.js';
 
 // TODO: define the Review schema per README.md section 1.
 
