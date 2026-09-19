@@ -4,11 +4,42 @@ import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema(
   {
-    // TODO
+    courseCode: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    rating: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
+      validate: {
+        validator: Number.isInteger,
+        message: "Rating must be an integer between 1 and 5",
+      },
+    },
+
+    comment: {
+      type: String,
+      trim: true,
+    },
+
+    reviewedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
 // TODO: add the uniqueness constraint described in README.md section 1.
+
+reviewSchema.index(
+  { courseCode: 1, reviewedBy: 1 },
+  { unique: true }
+);
 
 export const Review = mongoose.model('Review', reviewSchema);

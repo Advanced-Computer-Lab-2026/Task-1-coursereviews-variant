@@ -25,5 +25,6 @@ app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.status || 500).json({ message: err.message || 'Server Error' });
 });
+console.log("Working")
 
 export default app;
