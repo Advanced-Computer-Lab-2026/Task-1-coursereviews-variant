@@ -50,6 +50,8 @@ export async function getReview(req, res, next) {
 
 // GET /api/reviews/summary?courseCode=CS101
 // Implemented per README.md section 4 (Mongoose aggregation pipeline)
+// GET /api/reviews/summary?courseCode=CS101
+// Implemented per README.md section 4 using Mongoose aggregation pipeline
 export async function getCourseSummary(req, res, next) {
   try {
     const { courseCode } = req.query;
@@ -81,6 +83,7 @@ export async function getCourseSummary(req, res, next) {
       }
     ]);
 
+    // If no reviews exist for this course, aggregate returns an empty array []
     if (!summary) {
       return res.json({
         courseCode: normalizedCode,
